@@ -1,11 +1,9 @@
 import cv2
 import numpy as np
 
-def write_and_show(file_name, img):
+def write_img(file_name, img):
     file_path = 'results/{}'.format(file_name)
     cv2.imwrite(file_path, img)
-    cv2.imshow(file_name, cv2.imread(file_path))
-    cv2.waitKey(0)
 
 def q1_1(img_name, img):
     rows, cols, _ = img.shape
@@ -13,7 +11,7 @@ def q1_1(img_name, img):
         for j in range(cols):
             gray = (0.3 * img[i, j][0]) + (0.59 * img[i, j][1]) + (0.11 * img[i, j][2])
             img[i, j] = [gray, gray, gray]
-    write_and_show('{}_q1-1.jpg'.format(img_name), img)
+    write_img('{}_q1-1.jpg'.format(img_name), img)
     return img
 
 def q1_2(img_name, img, threshold = 127):
@@ -21,7 +19,7 @@ def q1_2(img_name, img, threshold = 127):
     for i in range(rows):
         for j in range(cols):
             img[i, j] = [255, 255, 255] if img[i, j][0] >= threshold else [0, 0, 0]
-    write_and_show('{}_q1-2.jpg'.format(img_name), img)
+    write_img('{}_q1-2.jpg'.format(img_name), img)
 
 def q1_3(img_name, img):
     pass
@@ -37,7 +35,7 @@ def q2_1_upscale(img_name, img):
             result[y + 1, x] = result[y + 1, x + 1] = img[i, j]
             x += 2
         y += 2
-    write_and_show('{}_q2-1-double.jpg'.format(img_name), result)
+    write_img('{}_q2-1-double.jpg'.format(img_name), result)
 
 
 def q2_1_downscale(img_name, img):
@@ -51,7 +49,7 @@ def q2_1_downscale(img_name, img):
             result[i, j] = img[y, x]
             x += 2
         y += 2
-    write_and_show('{}_q2-1-half.jpg'.format(img_name), result)
+    write_img('{}_q2-1-half.jpg'.format(img_name), result)
 
 def q2_2_upscale(img_name, img):
     rows, cols, _ = img.shape
@@ -100,7 +98,7 @@ def q2_2_upscale(img_name, img):
         y += 2
 
     result = result[0:rows * 2, 0:cols * 2]
-    write_and_show('{}_q2-2-double.jpg'.format(img_name), result)
+    write_img('{}_q2-2-double.jpg'.format(img_name), result)
 
 def q2_2_downscale(img_name, img):
     rows, cols, _ = img.shape
@@ -114,7 +112,7 @@ def q2_2_downscale(img_name, img):
                 result[i, j][p] = (int(img[y, x][p]) + int(img[y, x + 1][p]) + int(img[y + 1, x][p]) + int(img[y + 1, x + 1][p])) / 4
             x += 2
         y += 2
-    write_and_show('{}_q2-2-half.jpg'.format(img_name), result)
+    write_img('{}_q2-2-half.jpg'.format(img_name), result)
 
 if __name__ == '__main__':
     img1 = cv2.imread('images/img1.png')
@@ -137,6 +135,7 @@ if __name__ == '__main__':
     q2_1_downscale('img2', img2)
     q2_1_downscale('img3', img3)
 
+    # it would take a while
     q2_2_upscale('img1', img1)
     q2_2_upscale('img2', img2)
     q2_2_upscale('img3', img3)
@@ -145,4 +144,4 @@ if __name__ == '__main__':
     q2_2_downscale('img2', img2)
     q2_2_downscale('img3', img3)
 
-    cv2.destroyAllWindows()
+    print('finish')
