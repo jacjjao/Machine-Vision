@@ -1,3 +1,4 @@
+from math import ceil
 import cv2
 import numpy as np
 
@@ -21,8 +22,43 @@ def q1_2(img_name, img, threshold = 127):
             img[i, j] = [255, 255, 255] if img[i, j][0] >= threshold else [0, 0, 0]
     write_img('{}_q1-2.jpg'.format(img_name), img)
 
+def color_dist(pixel_a, pixel_b):
+    return int(abs(pixel_a[0] - pixel_b[0]) + abs(pixel_a[1] - pixel_b[1]) + abs(pixel_a[2] - pixel_b[2]))
+
 def q1_3(img_name, img):
-    pass
+    rows, cols, _ = img.shape
+    
+    # construct the palette
+    r = int(rows / 4)
+    c = int(cols / 4)
+    tiles = np.zeros((4, 4, 3), np.float64)
+    for i in range(rows):
+        for j in range(cols):
+            y = int(i / r)
+            x = int(j / c)
+            if y >= 4 or x >= 4:
+                continue
+            for p in range(3):
+                tiles[y, x][p] += img[i, j][p] / (r * c)
+    tiles = tiles.astype(np.uint8, copy=False)
+    t = []
+    for i in range(4):
+        for j in range(4):
+            t.append(tiles[i, j])
+    tiles = t
+
+    for i in range(rows):
+        for j in range(cols):
+            cur_tile = tiles[0]
+            cur_dist = color_dist(img[i, j].astype(np.int64), tiles[0].astype(np.int64))
+            for tile in tiles:
+                d = color_dist(img[i, j].astype(np.int64), tile.astype(np.int64))
+                if cur_dist > d:
+                    cur_dist = d
+                    cur_tile = tile
+            img[i, j] = cur_tile
+    write_img('{}_q1-3.jpg'.format(img_name), img)
+
 
 def q2_1_upscale(img_name, img):
     rows, cols, _ = img.shape
@@ -115,6 +151,7 @@ def q2_2_downscale(img_name, img):
     write_img('{}_q2-2-half.jpg'.format(img_name), result)
 
 if __name__ == '__main__':
+    
     img1 = cv2.imread('images/img1.png')
     img2 = cv2.imread('images/img2.png')
     img3 = cv2.imread('images/img3.png')
@@ -126,6 +163,10 @@ if __name__ == '__main__':
     q1_2('img1', img1_q1_1)
     q1_2('img2', img2_q1_1)
     q1_2('img3', img3_q1_1)
+    
+    q1_3('img1', img1.copy())
+    q1_3('img2', img2.copy())
+    q1_3('img3', img3.copy())
 
     q2_1_upscale('img1', img1)
     q2_1_upscale('img2', img2)
@@ -135,7 +176,7 @@ if __name__ == '__main__':
     q2_1_downscale('img2', img2)
     q2_1_downscale('img3', img3)
 
-    # it would take a while
+    # it will take a while
     q2_2_upscale('img1', img1)
     q2_2_upscale('img2', img2)
     q2_2_upscale('img3', img3)
@@ -145,3 +186,4 @@ if __name__ == '__main__':
     q2_2_downscale('img3', img3)
 
     print('finish')
+    
