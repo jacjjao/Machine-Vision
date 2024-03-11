@@ -41,6 +41,7 @@ def q1_3(img_name, img):
             for p in range(3):
                 tiles[y, x][p] += img[i, j][p] / (r * c)
     tiles = tiles.astype(np.uint8, copy=False)
+    write_img('{}_q1-3-color_map.jpg'.format(img_name), tiles)
     t = []
     for i in range(4):
         for j in range(4):
