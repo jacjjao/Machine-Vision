@@ -1,3 +1,12 @@
-results/
-*.txt
-*.zip
+*
+!*/
+!110820057_hw1/**
+!110820057_hw2/project_hw2/opencv/**
+!110820057_hw2/project_hw2/*.cpp
+!110820057_hw2/project_hw2/*.hpp
+!110820057_hw2/project_hw2/images/**
+!110820057_hw2/project_hw2/results/**
+!110820057_hw2/project_hw2/*.sln
+!110820057_hw2/project_hw2/*.vcxproj
+!110820057_hw2/project_hw2/*.vcxproj.filters
+!110820057_hw2/project_hw2/*.vcxproj.user
