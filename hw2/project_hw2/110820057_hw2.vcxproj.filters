@@ -37,7 +37,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UnionFind.hpp">
+    <ClInclude Include="include\UnionFind.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -136,7 +136,7 @@
     <Image Include="images\img4.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UnionFind.hpp" />
+    <ClInclude Include="include\UnionFind.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

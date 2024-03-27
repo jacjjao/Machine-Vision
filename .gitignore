@@ -1,12 +1,1 @@
-*
-!*/
-!hw1/**
-!hw2/project_hw2/opencv/**
-!hw2/project_hw2/*.cpp
-!hw2/project_hw2/*.hpp
-!hw2/project_hw2/images/**
-!hw2/project_hw2/results/**
-!hw2/project_hw2/*.sln
-!hw2/project_hw2/*.vcxproj
-!hw2/project_hw2/*.vcxproj.filters
-!hw2/project_hw2/*.vcxproj.user
+.vs/
