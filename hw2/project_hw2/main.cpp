@@ -7,8 +7,6 @@
 #include <filesystem>
 #include "UnionFind.hpp"
 
-#define PROJECT_DIR "C:/Users/user/Desktop/Machine Vision/110820057_hw2/project_hw2/"
-
 cv::Mat ToGray(const cv::Mat& img)
 {
     cv::Mat result(img.rows, img.cols, CV_8U);
